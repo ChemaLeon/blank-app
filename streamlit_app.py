@@ -9,14 +9,27 @@ You can stop looking at this now.
 Please.
 """
 
-st.write("This is some text made using Python.")
+with st.form("my_form"):
+    fav_color = st.selectbox(
+        "What's your favorite color?",
+        [
+            "Red",
+            "Orange",
+            "Yellow",
+            "Green",
+            "Blue",
+            "Purple"
+        ]
+    )
+    
+    reason = st.text_area("Talk about why that's your favorite color.")
 
-adjective = st.text_input("Type in an adjective")
-noun = st.text_input("Type in a noun")
-verb = st.text_input("Type in a verb in past tense")
-
-st.write("I just gave a " + noun + " twenty " + adjective + " dollars and he " + verb + " me!")
-
-pressed = st.button("Press me!")
-if pressed:
-    st.write("Why did you do that?")
+    submitted = st.form_submit_button("Submit")
+    if submitted:
+        st.write("It's interesting that you like " + fav_color + ".")
+        st.write("Your say it's because:")
+        st.write("""
+        ```
+        reason
+        ```
+        """.replace("reason", reason))
